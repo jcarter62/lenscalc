@@ -1,0 +1,9 @@
+# -v
+./new_ver
+rm -f main.o lens a.out
+make lens
+make a.out
+mv /usr/bin/lens /usr/bin/lens.old
+mv a.out /usr/bin/lens
+chmod +rwx /usr/bin/lens* 
+

@@ -1,0 +1,64 @@
+
+.c~.obj:
+	$(GET) $(GFLAGS) -p $< > $*.c
+	$(CC) $(CFLAGS) -Fo$*.obj -c $*.c
+	-rm -f $*.c
+
+.c.obj: 
+	$(CC) $(CFLAGS) -c -Fo$*.obj $*.c;
+
+.SUFFIXES:
+
+.SUFFIXES: .obj .c .c~ .h .h~
+
+OBJS = math.obj sag.obj convert.obj iw.obj init.obj i_lens.obj lenscalc.obj mod_et.obj dis_menu.obj table.obj dist.obj pr_lens.obj sr_data.obj pfile.obj sig.obj mod_mat.obj bif.obj toric.obj menu.obj tor02.obj spec_menu.obj help.obj get.obj
+SRCS = sag.c convert.c iw.c init.c i_lens.c lenscalc.c mod_et.c dis_menu.c table.c dist.c pr_lens.c sr_data.c pfile.c sig.c mod_mat.c bif.c toric.c menu.c tor02.c spec_menu.c help.c get.c
+HFILES = circle.h lens.h pfile.h point.h table.h sid.h
+
+CFLAGS = -O -Mm0d -CSON -K -dos -Ddos
+
+LIB= -lcurses 
+
+
+all   : doslens.exe
+	@echo done
+
+clean : 
+	rm -f core *.obj L/* S/*
+
+$(OBJS) : lens.h
+
+doslens.exe : main.obj $(OBJS)
+	cc -Fm $(CFLAGS) $(LIB) -o doslens.exe main.obj $(OBJS) 
+
+decar.obj : circle.h lens.h pfile.h
+
+dis_menu.obj : lens.h table.h
+
+dist.obj : point.h
+
+i_lens.obj : lens.h
+
+iw.obj : lens.h
+
+lenscalc.obj : lens.h
+
+main.obj : lens.h table.h sid.h
+
+mod_et.obj : lens.h
+
+pfile.obj : pfile.h
+
+plateau.obj : lens.h pfile.h
+
+pr_lens.obj : lens.h pfile.h
+
+round.obj : lens.h
+
+sr_data.obj : lens.h
+
+table.obj : lens.h table.h
+
+tor02.obj : lens.h
+
+
